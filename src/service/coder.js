@@ -1,8 +1,15 @@
 class Coder {
 
+    static getBaseRectangle() {
+        return {
+            bottomLeft: { latitude: -90, longitude: -180 },
+            topRight: { latitude: 90, longitude: 180 }
+        };
+    }
+
     encode(coordinate, accuracy) {
         this.code = '';
-        this.currentRectangle = Coder.baseRectangle;
+        this.currentRectangle = Coder.getBaseRectangle();
     
         while (this.code.length !== accuracy) {
             if (this.code.length % 2 === 0) {
@@ -15,7 +22,7 @@ class Coder {
     }
 
     decode(code) {
-        this.currentRectangle = Coder.baseRectangle;
+        this.currentRectangle = Coder.getBaseRectangle();
     
         for (let i = 0; i < code.length; i++) {
             if (i % 2 === 0) {
@@ -58,10 +65,5 @@ class Coder {
         };
     }
 }
-
-Coder.baseRectangle = {
-    bottomLeft: { latitude: -90, longitude: -180 },
-    topRight: { latitude: 90, longitude: 180 }
-};
 
 module.exports = Coder;
